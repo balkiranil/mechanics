@@ -1,0 +1,18 @@
+function [sigma_xp, tau_xyp] = plane_stress(sigma_x, sigma_y, tau_xy, theta)
+% Computes the stresses in a 2D plane stress state for a given set of inputs
+% 
+% Inputs:
+% - sigma_x: the normal stress in the x-direction
+% - sigma_y: the normal stress in the y-direction
+% - tau_xy: the shear stress in the xy-direction
+% - theta: the angle (in radians) between the x-axis and the direction of interest
+%
+% Outputs:
+% - sigma_xp: the normal stress in the direction of interest
+% - tau_xyp: the shear stress in the direction of interest
+%
+% Note: the "prime" symbol (') indicates stresses in the direction of interest
+
+% Compute the stresses in the direction of interest
+sigma_xp = (sigma_x + sigma_y)/2 + (sigma_x - sigma_y)/2 * cos(2*theta) + tau_xy * sin(2*theta);
+tau_xyp = -(sigma_x - sigma_y)/2 * sin(2*theta) + tau_xy * cos(2*theta);
