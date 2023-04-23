@@ -1,0 +1,11 @@
+function [e, k] = dilatation_and_bulk(sigma_x, sigma_y, sigma_z, nu, E)
+% This function computes the dilatation and bulk modulus based on the given stress components
+% and material properties (Poisson's ratio and Young's modulus).
+
+% Compute the dilatation
+e = (1-2*nu)/(E) * (sigma_x + sigma_y + sigma_z);
+
+% Compute the bulk modulus
+k = E/(3*(1-2*nu));
+
+end
