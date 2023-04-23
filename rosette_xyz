@@ -1,0 +1,18 @@
+function [eps_x, eps_y,gamma_xy] = rosette_xyz(theta, eps_a, eps_b, eps_c)
+       
+    % Compute strains for theta = 45 degrees
+    if theta == 45
+        eps_x = eps_a;
+        eps_y = eps_c;
+        gamma_xy = 2*eps_b - (eps_a + eps_c);
+    % Compute strains for theta = 60 degrees
+    elseif theta == 60
+        eps_x = eps_a;
+        eps_y = (2*eps_b + 2*eps_c - eps_a)/3;
+        gamma_xy = (2/sqrt(3))*(eps_b - eps_c);
+    % Handle all other cases
+    else
+    end
+    
+end
+
