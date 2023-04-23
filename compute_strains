@@ -1,0 +1,13 @@
+function [epsilon_x, epsilon_y, epsilon_z] = compute_strains(sigma_x, sigma_y, sigma_z, nu, E)
+% This function computes the strains based on the given stress components
+% and material properties (Poisson's ratio and Young's modulus).
+
+% Compute strains in x direction
+epsilon_x = (1/E) * (sigma_x - nu*(sigma_y + sigma_z));
+
+% Compute strains in y direction
+epsilon_y = (1/E) * (sigma_y - nu*(sigma_x + sigma_z));
+
+% Compute strains in z direction
+epsilon_z = (1/E) * (sigma_z - nu*(sigma_x + sigma_y));
+end
