@@ -1,0 +1,35 @@
+function [theta,epsilon_xp, epsilon_yp, gamma_xyp, epsilon_1,epsilon_2, epsilon_avg, gamma_max, gamma_min] = plane_strain_nottheta(epsilon_x, epsilon_y, gamma_xy)
+% Computes the plane-strain transformation of a 2D strain state, as well as the principal normal strains, 
+% maximum in-plane shear strain, average strain, and minimum and maximum shear strains
+%
+% Inputs:
+% - epsilon_x: the normal strain in the x-direction
+% - epsilon_y: the normal strain in the y-direction
+% - gamma_xy: the shear strain in the xy-direction
+%
+% Outputs:
+% - epsilon_xp: the transformed normal strain in the x'-direction
+% - epsilon_yp: the transformed normal strain in the y'-direction
+% - gamma_xyp: the transformed shear strain in the x'y'-direction
+% - epsilon_1: the maximum principal normal strain
+% - epsilon_avg: the average normal strain
+% - gamma_max: the maximum in-plane shear strain
+% - gamma_min: the minimum in-plane shear strain
+
+% Compute the transformed strains
+theta = atan2(2*gamma_xy, epsilon_x - epsilon_y)/2;
+
+epsilon_xp = (epsilon_x + epsilon_y)/2 + (epsilon_x - epsilon_y)/2*cos(2*theta) + gamma_xy*sin(2*theta)/2;
+epsilon_yp = (epsilon_x + epsilon_y)/2 - (epsilon_x - epsilon_y)/2*cos(2*theta) - gamma_xy*sin(2*theta)/2;
+gamma_xyp = -(epsilon_x - epsilon_y)/2*sin(2*theta) + gamma_xy*cos(2*theta)/2;
+
+% Compute the principal normal strains
+epsilon_1 = (epsilon_xp + epsilon_yp)/2 + sqrt(((epsilon_xp - epsilon_yp)/2)^2 + gamma_xyp^2/4);
+epsilon_2 = (epsilon_xp + epsilon_yp)/2 - sqrt(((epsilon_xp - epsilon_yp)/2)^2 + gamma_xyp^2/4);
+
+% Compute the maximum and average normal strains
+epsilon_avg = (epsilon_x + epsilon_y)/2;
+
+% Compute the maximum and minimum in-plane shear strains
+gamma_max = sqrt(((epsilon_x - epsilon_y)/2)^2 + (gamma_xy/2)^2);
+gamma_min = (epsilon_1 - epsilon_avg)/2;
