@@ -1,0 +1,14 @@
+function [sigma_max,sigma_min = max_principal_stress(sigma_x, sigma_y, tau_xy)
+% Computes the maximum principal normal stress for a 2D stress state
+% 
+% Inputs:
+% - sigma_x: the normal stress in the x-direction
+% - sigma_y: the normal stress in the y-direction
+% - tau_xy: the shear stress in the xy-direction
+%
+% Output:
+% - sigma_max: the maximum principal normal stress
+
+% Compute the maximum principal normal stress
+sigma_max = (sigma_x + sigma_y)/2 + sqrt(((sigma_x - sigma_y)/2)^2 + tau_xy^2);
+sigma_min = (sigma_x + sigma_y)/2 - sqrt(((sigma_x - sigma_y)/2)^2 + tau_xy^2);
