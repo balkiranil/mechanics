@@ -1,0 +1,14 @@
+function [epsilon_a, epsilon_b, epsilon_c] = rosette_abc(epsilon_x, epsilon_y, gamma_xy, theta_a, theta_b, theta_c)
+% This function computes the strains in a strain rosette based on the given strain components
+% and angles of the strain rosette.
+
+% Compute strain along direction a
+epsilon_a = epsilon_x * cos(theta_a)^2 + epsilon_y * sin(theta_a)^2 + gamma_xy * sin(theta_a) * cos(theta_a);
+
+% Compute strain along direction b
+epsilon_b = epsilon_x * cos(theta_b)^2 + epsilon_y * sin(theta_b)^2 + gamma_xy * sin(theta_b) * cos(theta_b);
+
+% Compute strain along direction c
+epsilon_c = epsilon_x * cos(theta_c)^2 + epsilon_y * sin(theta_c)^2 + gamma_xy * sin(theta_c) * cos(theta_c);
+
+end
